@@ -1,0 +1,28 @@
+/* Estilo para el contenedor principal del slide */
+.combo-hero {
+  display: flex; /* La clave para alinear elementos en una línea */
+  justify-content: space-between; /* Empuja el título a la izquierda y el precio a la derecha */
+  align-items: center; /* Centra verticalmente los elementos */
+  padding: 10px 0;
+  gap: 15px;
+}
+
+/* Estilo para el título del combo */
+.comboHeroTitle {
+  font-size: 16px; /* Puedes ajustar el tamaño si lo deseas */
+  font-weight: 400; /* Una fuente más fina que el 'bold' (700) */
+  color: var(--primary-color);
+  margin: 0; /* Reseteamos el margen para que flexbox lo controle */
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Añade '...' si el texto es muy largo */
+}
+
+/* Estilo para el precio del combo */
+.combo-hero-price {
+  font-size: 18px;
+  font-weight: 500; /* Un poco más de peso que el título para destacarlo */
+  color: var(--primary-color);
+  margin: 0;
+  flex-shrink: 0; /* Evita que el precio se encoja si no hay espacio */
+}

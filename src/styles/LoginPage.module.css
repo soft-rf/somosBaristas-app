@@ -1,0 +1,122 @@
+.loginContainer {
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 5px;
+}
+
+/*     LOGO SOMOS BARISTAS PRINCIPAL      ------>  INICIO <----- */
+
+.loginLogo {
+  display: inline-block;
+  padding: 35px 30px;
+  margin-bottom: 100px;
+  border-radius: 3px;
+  border: 1px solid var(--primary-color);
+  background-color: var(--background-color);
+}
+
+.loginLogoText {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 0.8;
+  letter-spacing: -0.5px;
+  text-align: left;
+  text-transform: none;
+}
+
+/*     LOGO SOMOS BARISTAS PRINCIPAL      ------>  FIN <----- */
+
+.loginPrompt {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto 25px auto;
+  text-align: center;
+}
+
+.loginPrompt p {
+  font-size: 16px;
+  white-space: nowrap;
+  margin-bottom: 8px;
+}
+
+.loginPromptLines {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.lineaFina {
+  width: 150px;
+  border: none;
+  height: 0.6px;
+  background-color: var(--primary-color);
+  margin: 0;
+}
+
+/*     BOTON DE AUTENTICAR CON GOOGLE      ------>  INICIO <----- */
+
+.loginSocial {
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 25px;
+}
+
+.loginButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 4px;
+  background-color: var(--button-color);
+  text-decoration: none;
+  color: var(--primary-color);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: var(--secondary-color);
+}
+
+.loginButton:hover {
+  background-color: #a9a9a9;
+}
+
+.googleIcon {
+  height: 18px;
+  width: auto;
+  background-color: transparent; /* Ajuste para que no herede el fondo del botón */
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/*     BOTON DE AUTENTICAR CON GOOGLE      ------>  FIN <----- */
+
+.loginLegal {
+  width: 100%;
+  max-width: 300px;
+  margin-top: 20px;
+  color: rgb(63, 63, 63);
+}
+
+.loginLegal p {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--color-text-subtle);
+}
+
+.loginLink {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.loginLink:hover {
+  text-decoration: underline;
+}

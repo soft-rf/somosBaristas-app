@@ -1,0 +1,85 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: var(--background-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.headerGroupLeft {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.headerGroupRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menuButton {
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--primary-color);
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* --- LOGO --- */
+.headerLogo {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+/* --- USUARIO --- */
+.headerUser {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.headerUserIcon img {
+  height: 18px;
+  width: auto;
+}
+
+.headerUserIcon {
+  margin-right: 5px;
+  font-size: initial;
+}
+
+/* --- CARRITO --- */
+.headerCart {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--primary-color);
+  position: relative;
+}
+
+.headerCartIcon img {
+  height: 30px;
+  width: auto;
+}
+
+.headerCartCount {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border-radius: 50%;
+  padding: 1px 5px;
+  font-size: 10px;
+  line-height: 1;
+}

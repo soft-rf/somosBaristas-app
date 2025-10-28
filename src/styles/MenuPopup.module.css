@@ -1,0 +1,158 @@
+/* ========================================================= */
+/* 1. OVERLAY (FONDO OSCURO) */
+/* ========================================================= */
+.menuPopupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+/* ========================================================= */
+/* 2. MENÚ LATERAL (SIDE NAV) */
+/* ========================================================= */
+.menuPopupContent {
+  width: 80%;
+  max-width: 300px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+}
+
+.menuPopupContent.isOpen {
+  transform: translateX(0);
+}
+
+/* ========================================================= */
+/* 3. ENCABEZADO Y BOTÓN CERRAR */
+/* ========================================================= */
+.menuHeader {
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid #eee;
+  align-items: center; /* Centrado vertical */
+  gap: 1rem; /* Espacio entre el título y el botón de cerrar */
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #333;
+}
+
+/* ========================================================= */
+/* 4. LISTA Y DESPLEGABLES */
+/* ========================================================= */
+.menuList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menuItem {
+  border-bottom: 1px solid #eee;
+}
+
+.menuLink {
+  display: block;
+  padding: 1rem;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.menuLink:hover {
+  background-color: #f9f9f9;
+}
+
+.menuLinkDropdownToggle {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdownIcon {
+  transition: transform 0.2s ease-in-out;
+  display: inline-block;
+}
+
+.dropdownIcon.open {
+  transform: rotate(180deg);
+}
+
+/* ========================================================= */
+/* CSS para Contenido Interno (Texto y Sub-links) */
+/* ========================================================= */
+
+.menuBrandTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333; /* Color de texto oscuro */
+  margin: 0;
+  flex-grow: 1; /* Empuja el botón de cerrar a la derecha */
+}
+
+.submenuWrapper {
+  background-color: #f8f8f8;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  max-height: 0;
+}
+
+/* Contenedor del contenido desplegado */
+.submenuContent {
+  padding: 0 1rem 1rem 1rem;
+  overflow: hidden;
+}
+
+/* Estilo para el texto informativo dentro de los desplegables */
+.menuInfoText {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ajuste para los sub-links de contacto */
+.submenuList {
+  padding: 0;
+  list-style: none;
+}
+
+.submenuItem {
+  padding: 0.25rem 0;
+}
+
+/* Asegura que los enlaces de contacto se vean bien */
+.submenuLink {
+  display: block;
+  padding: 0.5rem 0; /* Espacio vertical */
+  color: #007bff; /* Color de enlace, puedes usar el color de tu marca */
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.submenuLink:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
