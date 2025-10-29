@@ -3,24 +3,26 @@ import styles from "../styles/ComboHero.module.css";
 
 const ComboHero = () => {
   return (
-    <section className="combo-hero">
-      <div className="combo-slider">
-        <div className="combo-slide active">
-          <div className="combo-slide-content">
-            <h2 className="combo-hero-title">Combo 300GR + Molino manual</h2>
-            <div className="combo-hero-price">$ 89.500</div>
+    <section className={styles.comboHero}>
+      <div className={styles.comboSlider}>
+        <div className={`${styles.comboSlide} ${styles.active}`}>
+          <div className={styles.comboSlideContent}>
+            <h2 className={styles.comboHeroTitle}>
+              Combo 300GR + Molino manual
+            </h2>
+            <div className={styles.comboHeroPrice}>$ 89.500</div>
           </div>
         </div>
       </div>
 
-      <div className="combo-hero-pagination">
-        <span className="dot active"></span>
-        <span className="dot"></span>
-        <span className="dot"></span>
-        <span className="dot"></span>
+      <div className={styles.comboHeroPagination}>
+        <span className={`${styles.dot} ${styles.active}`}></span>
+        <span className={styles.dot}></span>
+        <span className={styles.dot}></span>
+        <span className={styles.dot}></span>
       </div>
 
-      <p className="combo-hero-info">
+      <p className={styles.comboHeroInfo}>
         Todos nuestros productos incluyen filtros gratis
       </p>
     </section>

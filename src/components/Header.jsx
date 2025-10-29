@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 import MenuPopup from "./MenuPopup";
 import styles from "../styles/Header.module.css";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // 1. Usamos el hook para acceder a los items del carrito
+  const { cartItems } = useCart();
+
+  // 2. Calculamos la cantidad total de items sumando las cantidades de cada producto.
+  // El método reduce() es perfecto para esto.
+  const totalItems = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   const toggleMenu = () => {
     document.body.style.overflow = isMenuOpen ? "auto" : "hidden";
@@ -43,7 +53,7 @@ const Header = () => {
           <span className={styles.headerCartIcon}>
             <img src="/image/package-check.svg" alt="check icon" />
           </span>
-          <span className={styles.headerCartCount}>0</span>
+          <span className={styles.headerCartCount}>{totalItems}</span>
         </Link>
       </div>
 

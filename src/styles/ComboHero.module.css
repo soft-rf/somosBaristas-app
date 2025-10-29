@@ -1,5 +1,4 @@
-/* Estilo para el contenedor principal del slide */
-.combo-hero {
+.comboHero {
   display: flex; /* La clave para alinear elementos en una línea */
   justify-content: space-between; /* Empuja el título a la izquierda y el precio a la derecha */
   align-items: center; /* Centra verticalmente los elementos */
