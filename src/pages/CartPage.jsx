@@ -8,11 +8,16 @@ import styles from "../styles/CartPage.module.css";
 
 const CartPage = () => {
   const { cartItems } = useCart();
+  const shippingCost = 3900; // Costo de envío fijo
 
-  const total = cartItems.reduce(
+  const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+
+  // El total ahora es la suma del subtotal y el costo de envío
+  // Solo se suma el envío si hay productos en el carrito
+  const total = cartItems.length > 0 ? subtotal + shippingCost : 0;
 
   return (
     <>
@@ -41,12 +46,18 @@ const CartPage = () => {
                     style: "currency",
                     currency: "ARS",
                     minimumFractionDigits: 0,
-                  }).format(total)}
+                  }).format(subtotal)}
                 </span>
               </div>
               <div className={styles.summaryRow}>
                 <span>Envío</span>
-                <span>A calcular</span>
+                <span>
+                  {new Intl.NumberFormat("es-AR", {
+                    style: "currency",
+                    currency: "ARS",
+                    minimumFractionDigits: 0,
+                  }).format(shippingCost)}
+                </span>
               </div>
               <div className={`${styles.summaryRow} ${styles.summaryTotal}`}>
                 <span>Total</span>
@@ -58,7 +69,10 @@ const CartPage = () => {
                   }).format(total)}
                 </span>
               </div>
-              <button className={styles.checkoutButton}>Iniciar Compra</button>
+              {/* Convertimos el botón en un Link a la nueva página de checkout */}
+              <Link to="/checkout" className={styles.checkoutButton}>
+                Iniciar Compra
+              </Link>
             </div>
           </>
         )}

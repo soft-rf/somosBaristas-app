@@ -1,0 +1,115 @@
+.checkoutContainer {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 40px auto;
+  gap: 40px;
+  padding: 0 20px;
+}
+
+.formSection {
+  flex: 2;
+  min-width: 300px;
+}
+
+.summarySection {
+  flex: 1;
+  min-width: 300px;
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 8px;
+  height: fit-content; /* Para que no se estire innecesariamente */
+}
+
+.title {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: var(--font-family);
+}
+
+.formGroup textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Resumen del Pedido --- */
+.summaryTitle {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  font-size: 16px;
+}
+
+.summaryRow:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+.summaryTotal {
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 15px;
+}
+
+.paymentButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  margin-top: 25px;
+  background-color: #009ee3; /* Color de Mercado Pago */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.paymentButton:hover {
+  background-color: #008ad0;
+}
+
+.paymentButton img {
+  height: 24px;
+}
+
+@media (max-width: 768px) {
+  .checkoutContainer {
+    flex-direction: column-reverse; /* El resumen aparece arriba en móvil */
+  }
+}
