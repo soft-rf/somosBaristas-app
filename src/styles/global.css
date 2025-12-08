@@ -1,7 +1,7 @@
 :root {
   --primary-color: #000000;
   --secondary-color: #ffffffc6;
-  --background-color: #ffffff;
+  --background-color: var(--cream-background);
   --button-color: #c4c4c4;
   --button-hover-color: #949494;
   --input-focus-border-color: #6f4e37;

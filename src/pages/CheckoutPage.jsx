@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import styles from "../styles/CheckoutPage.module.css";
 
 const CheckoutPage = () => {
-  const { cartItems } = useCart(); // Y que se esté usando aquí
+  const { cartItems, clearCart } = useCart(); // 1. Importa la función para limpiar el carrito
 
   // Estados para manejar los campos del formulario
   const [fullName, setFullName] = useState("");
@@ -40,7 +40,12 @@ const CheckoutPage = () => {
     // 2. Recopilar la información del pedido
     const orderTimestamp = new Date();
     const orderData = {
-      products: cartItems.map(item => ({ id: item.id, name: item.name, quantity: item.quantity, price: item.price })),
+      products: cartItems.map((item) => ({
+        id: item.id,
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price,
+      })),
       total: total,
       customer: {
         fullName,
@@ -54,32 +59,35 @@ const CheckoutPage = () => {
     };
 
     // 3. Enviar el pedido al backend
-    fetch('/api/orders', {
-      method: 'POST',
+    fetch("/api/orders", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(orderData),
     })
-    .then(res => {
-      if (res.ok) {
-        // 4. Mostrar la pantalla de confirmación si todo fue bien
-        setOrderPlaced(true);
-        return res.json();
-      }
-      // Si el backend responde con un error
-      throw new Error('El servidor respondió con un error.');
-    })
-    .then(data => {
-      console.log('Pedido recibido por el backend:', data);
-    })
-    .catch(error => {
-      console.error("Error al enviar el pedido:", error);
-      alert("Hubo un problema al registrar tu pedido. Por favor, intenta de nuevo.");
-    })
-    .finally(() => {
-      setIsLoading(false);
-    });
+      .then((res) => {
+        if (res.ok) {
+          // 4. Mostrar la pantalla de confirmación si todo fue bien
+          setOrderPlaced(true);
+          clearCart(); // 2. Limpia el carrito después de un pedido exitoso
+          return res.json();
+        }
+        // Si el backend responde con un error
+        throw new Error("El servidor respondió con un error.");
+      })
+      .then((data) => {
+        console.log("Pedido recibido por el backend:", data);
+      })
+      .catch((error) => {
+        console.error("Error al enviar el pedido:", error);
+        alert(
+          "Hubo un problema al registrar tu pedido. Por favor, intenta de nuevo."
+        );
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (

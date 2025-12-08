@@ -1,17 +1,13 @@
-const { Router } = require("express");
-const {
-  createOrder,
-  getOrders,
-} = require("../controllers/order.controller");
+const express = require("express");
+const router = express.Router();
 
-const router = Router();
+// Importamos solo los controladores que existen
+const { createOrder } = require("../controllers/order.controller");
 
-// Ruta para obtener todos los pedidos
-// GET /api/orders
-router.get("/", getOrders);
-
-// Ruta para crear un nuevo pedido
-// POST /api/orders
+// Definimos la ruta para crear un nuevo pedido
+// Esta ruta corresponde a POST /api/orders/
 router.post("/", createOrder);
+
+// Por ahora no tenemos una ruta GET para pedidos, así que no la definimos.
 
 module.exports = router;

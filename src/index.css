@@ -3,9 +3,12 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Colores para el tema claro (crema y negro) */
+  --cream-background: #fdf5e6; /* Un tono de crema */
+  --primary-text-color: #333333; /* Negro suave */
+
+  color: var(--primary-text-color);
+  background-color: var(--cream-background);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,11 +18,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #646cff; /* Puedes ajustar esto si necesitas otro color para los enlaces */
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #535bf2; /* Ajusta según el color del enlace */
 }
 
 body {
@@ -28,6 +31,16 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  /* Asegurarse de que el body herede el color de fondo y texto del root */
+  background-color: var(--cream-background);
+  color: var(--primary-text-color);
+}
+
+/* Estilos para el nuevo contenedor de la aplicación */
+.app-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
@@ -42,27 +55,14 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #f0f0f0; /* Un color claro para el botón en tema crema */
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #646cff; /* Mantener color de hover o ajustar si es necesario */
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
