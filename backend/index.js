@@ -2,6 +2,8 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config(); // Carga las variables de entorno del archivo .env
+const productRoutes = require("./routes/product.routes");
+const orderRoutes = require("./routes/order.routes");
 
 // 2. Configuramos el servidor
 const app = express();
@@ -16,7 +18,11 @@ app.get("/", (req, res) => {
   res.send("El servidor del backend de Somos Baristas está funcionando!");
 });
 
-// 5. Iniciamos el servidor
+// 5. Rutas de la API
+app.use(productRoutes);
+app.use("/api/orders", orderRoutes);
+
+// 6. Iniciamos el servidor
 app.listen(port, () => {
   console.log(`Servidor escuchando en http://localhost:${port}`);
 });

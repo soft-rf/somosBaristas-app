@@ -1,0 +1,60 @@
+.statusContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 40px 20px;
+  background-color: #fafafa;
+}
+
+.statusBox {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+  max-width: 500px;
+  text-align: center;
+  border-top: 5px solid #28a745; /* Verde para éxito por defecto */
+}
+
+.statusIcon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+.failureIcon {
+  color: #dc3545; /* Rojo para error */
+}
+
+.pendingIcon {
+  color: #ffc107; /* Amarillo para pendiente */
+}
+
+.statusTitle {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.statusMessage {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.statusButton {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 25px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.statusButton:hover {
+  background-color: var(--primary-color-dark);
+}

@@ -41,13 +41,12 @@ const Header = () => {
       </div>
 
       <div className={styles.headerGroupRight}>
-        {/* Usamos Link para navegar a la ruta de Login /login */}
-        <Link to="/login" className={styles.headerUser}>
+        <div className={styles.headerUser}>
           <span className={styles.headerUserIcon}>
             <img src="/image/user.svg" alt="user icon" />
           </span>
           <span className={styles.headerUserName}>Hola! Usuario</span>
-        </Link>
+        </div>
         {/* Usamos Link para el carrito, apuntando temporalmente a una ruta que crearemos más adelante */}
         <Link to="/cart" className={styles.headerCart} aria-label="Ver carrito">
           <span className={styles.headerCartIcon}>

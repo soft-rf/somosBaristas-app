@@ -11,7 +11,7 @@ const productData = [
     title: "En grano x 300gr",
     imageSrc: "/image/300gr.png", // La ruta debe coincidir con public/image/
     altText: "Bolsa de café en grano de 300 gramos",
-    price: "$ 16.500",
+    price: "$ 500",
     options: [
       { label: "Perú", dataOrigin: "peru", dataId: "c300-peru" },
       { label: "Brasil", dataOrigin: "brasil", dataId: "c300-brasil" },
