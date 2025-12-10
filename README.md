@@ -1,16 +1,38 @@
-# React + Vite
+# ☕ Somos Baristas - E-commerce de Café de Especialidad
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Logo o imagen del proyecto](front/public/image/300gr.png)
 
-Currently, two official plugins are available:
+Una aplicación web de comercio electrónico (full-stack) desarrollada para una cafetería de especialidad. Este proyecto combina un _frontend_ construido con **React** y un _backend_ robusto con **Node.js (Express)** utilizando una base de datos **SQLite**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📖 Resumen General (Overview)
 
-## React Compiler
+**Somos Baristas** es una plataforma en línea diseñada para que los entusiastas del café puedan adquirir fácilmente sus granos y productos favoritos. La aplicación ofrece una experiencia de compra fluida, desde la exploración del catálogo hasta un proceso de pago seguro y eficiente. Cuenta con una interfaz amigable y un _backend_ sólido para la gestión de productos y pedidos.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Características Principales
 
-## Expanding the ESLint configuration
+- **Catálogo de Productos:** Exploración de una amplia variedad de productos de café.
+- **Carrito de Compras:** Funcionalidad completa para agregar y gestionar artículos antes de la compra.
+- **Proceso de Pago (Checkout):** Proceso de pago en múltiples pasos para realizar pedidos de manera estructurada.
+- **Gestión de Pedidos:** El _backend_ procesa y almacena los pedidos de los clientes.
+- **Autenticación de Usuarios:** Página de inicio de sesión simple para el acceso de usuarios.
+- **Páginas de Estado de Pago:** Retroalimentación al usuario sobre el resultado de su transacción (éxito, fallo, pendiente).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tecnologías Utilizadas
+
+### Frontend
+
+- **React**
+- **Vite** (Como herramienta de _bundling_)
+- **React Router** (Para la navegación)
+- **CSS Modules** (Para el estilizado)
+
+### Backend
+
+- **Node.js**
+- **Express** (Framework del servidor)
+- **SQLite** (Base de datos)
+- **CORS** (Para gestionar el acceso entre el _frontend_ y _backend_)
+
+## 🏗️ Estructura del Proyecto
+
+El proyecto está organizado en dos carpetas principales, `front` (frontend) y `backend` (servidor):
