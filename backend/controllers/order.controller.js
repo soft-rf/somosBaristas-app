@@ -34,9 +34,13 @@ async function createOrder(req, res) {
     // Asegurarse de que newOrder tenga todos los campos necesarios para el ticket
     // La función createOrder de dbService ya devuelve el objeto completo
     await ticketService.generateAndSaveTicket(newOrder);
+
+    // *** NUEVO: Generar el link de WhatsApp ***
+    const whatsappUrl = ticketService.generateWhatsAppUrl(newOrder);
     // ***********************************************
 
-    res.status(201).json(newOrder);
+    // Devolvemos la orden Y la URL de WhatsApp
+    res.status(201).json({ order: newOrder, whatsappUrl });
   } catch (error) {
     console.error("Error en el controlador al crear el pedido:", error);
     res

@@ -68,9 +68,6 @@ const CheckoutPage = () => {
     })
       .then((res) => {
         if (res.ok) {
-          // 4. Mostrar la pantalla de confirmación si todo fue bien
-          setOrderPlaced(true);
-          clearCart(); // 2. Limpia el carrito después de un pedido exitoso
           return res.json();
         }
         // Si el backend responde con un error
@@ -78,6 +75,16 @@ const CheckoutPage = () => {
       })
       .then((data) => {
         console.log("Pedido recibido por el backend:", data);
+
+        // 4. Redirección a WhatsApp
+        if (data.whatsappUrl) {
+          clearCart(); // Limpiamos el carrito antes de irnos
+          window.location.href = data.whatsappUrl; // Redirigimos a WhatsApp
+        } else {
+          // Fallback: Si no hay link, mostramos la pantalla de gracias local
+          setOrderPlaced(true);
+          clearCart();
+        }
       })
       .catch((error) => {
         console.error("Error al enviar el pedido:", error);

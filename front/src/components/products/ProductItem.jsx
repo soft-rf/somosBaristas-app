@@ -1,35 +1,47 @@
-// src/components/products/ProductItem.jsx
-
 import React, { useState } from "react";
 import { useCart } from "../../context/CartContext";
 import styles from "../../styles/ProductItem.module.css";
+import ProductDetailPopup from "./ProductDetailPopup"; // Importar el popup
 
-// El componente ahora recibe todas las propiedades del producto gracias al spread operator
-const ProductItem = ({ id, title, imageSrc, altText, price, options }) => {
-  // 1. Usamos el hook para acceder a la función addToCart
+// Texto de ejemplo para los detalles del origen
+const originDetailsText = `Origen: Perú
+Región: Amazonas
+Varietal: Blend
+Beneficio: Natural
+Altura: 1600 metros
+Finca: Timbuyacu
+Notas organolépticas: Pasas de uva, chocolate blanco, arándanos
+
+Este Blend de beneficio natural proviene de la finca Timbuyacu, en la región de Amazonas, cultivado a 1600 metros de altura. Su fragancia es intensa y envolvente, con matices dulces que recuerdan a pasas de uva, chocolate blanco y frutos. En taza, se expresa con un cuerpo almibarado y una acidez delicada que realza su perfil frutal. Los sabores a arándanos y pasas se combinan con la cremosidad del chocolate blanco, ofreciendo una experiencia rica y compleja. El retrogusto es prolongado, jugoso y balanceado. Un café dulce y sofisticado, ideal para quienes buscan una taza con carácter frutal y goloso.`;
+
+const ProductItem = ({
+  id,
+  title,
+  imageSrc,
+  altText,
+  price,
+  options,
+  isAvailable = true,
+}) => {
   const { addToCart } = useCart();
-  // Estado para mostrar el mensaje de confirmación
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false); // Estado para el popup
 
-  // 2. Creamos un manejador para el clic
   const handleAddToCart = (option) => {
-    // Creamos un objeto de producto específico para el carrito
     const productToAdd = {
-      id: option.dataId, // ID único de la variante (ej: 'c300-peru')
-      title: `${title} - ${option.label}`, // Título combinado (ej: 'En grano x 300gr - Perú')
-      price: parseFloat(price.replace("$", "").replace(".", "")), // Convertimos el precio a número
+      id: option.dataId,
+      title: `${title} - ${option.label}`,
+      price: parseFloat(price.replace(/[\$\.]/g, "")),
       imageSrc,
-      quantity: 1, // Siempre añadimos 1 al principio
+      quantity: 1,
     };
     addToCart(productToAdd);
-
-    // Mostramos el mensaje de confirmación
     setShowConfirmation(true);
-    // Y lo ocultamos después de 1.5 segundos
-    setTimeout(() => {
-      setShowConfirmation(false);
-    }, 900);
+    setTimeout(() => setShowConfirmation(false), 900);
   };
+
+  const openPopup = () => setIsPopupOpen(true);
+  const closePopup = () => setIsPopupOpen(false);
 
   return (
     <article className={styles.productItem}>
@@ -45,24 +57,37 @@ const ProductItem = ({ id, title, imageSrc, altText, price, options }) => {
               >
                 {option.label}
               </button>
-              {/* 3. Asociamos el manejador al evento onClick */}
+
+              {isAvailable && (
+                <button className={styles.detailButton} onClick={openPopup}>
+                  Ver detalle
+                </button>
+              )}
+
               <button
                 className={styles.addButton}
                 onClick={() => handleAddToCart(option)}
+                disabled={!isAvailable}
               >
-                añadir
+                {isAvailable ? "añadir" : "próximamente"}
               </button>
             </div>
           ))}
         </div>
-        {/* Mensaje de confirmación que se muestra condicionalmente */}
         {showConfirmation && (
           <div className={styles.confirmationMessage}>
             ✓ Agregado al carrito
           </div>
         )}
-        <div className={styles.productPrice}>{price}</div>
+        {isAvailable && <div className={styles.productPrice}>{price}</div>}
       </div>
+
+      {isPopupOpen && (
+        <ProductDetailPopup
+          originDetails={originDetailsText}
+          onClose={closePopup}
+        />
+      )}
     </article>
   );
 };

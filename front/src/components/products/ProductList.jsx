@@ -19,23 +19,12 @@ const productData = [
     ],
   },
   {
-    id: "prod-2",
-    title: "En grano x 500gr",
-    imageSrc: "/image/500gr.png",
-    altText: "Bolsa de café en grano de 500 gramos",
-    price: "$ 26.300",
-    options: [
-      { label: "Perú", dataOrigin: "peru", dataId: "c500-peru" },
-      { label: "Brasil", dataOrigin: "brasil", dataId: "c500-brasil" },
-      { label: "Colombia", dataOrigin: "colombia", dataId: "c500-colombia" },
-    ],
-  },
-  {
     id: "prod-3",
     title: "MOLINOS MANUALES",
     imageSrc: "/image/molino-manual.png",
     altText: "Molino manual de café",
     price: "$ 79.500",
+    isAvailable: false,
     // Las opciones singulares (molino y balanza) se manejan con un array de 1
     options: [
       {
@@ -51,6 +40,7 @@ const productData = [
     imageSrc: "/image/balanza.png",
     altText: "Balanza digital con cronómetro",
     price: "$ 50.000",
+    isAvailable: false,
     options: [
       {
         label: "Semi - profesional",
@@ -68,11 +58,7 @@ const ProductList = () => {
       {productData.map((product) => (
         <ProductItem
           key={product.id} // Usar un ID único en lugar del índice
-          title={product.title}
-          imageSrc={product.imageSrc}
-          altText={product.altText}
-          price={product.price}
-          options={product.options}
+          {...product}
         />
       ))}
     </section>

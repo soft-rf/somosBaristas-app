@@ -1,43 +1,32 @@
-const { open } = require("sqlite");
-const sqlite3 = require("sqlite3");
+const { createClient } = require("@supabase/supabase-js");
+require("dotenv").config();
 
-let db;
+// Inicializar cliente de Supabase
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  console.error("Faltan las variables de entorno SUPABASE_URL o SUPABASE_KEY");
+  process.exit(1);
+}
+
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 /**
- * Inicializa la conexión con la base de datos SQLite y crea las tablas si no existen.
+ * Inicializa la conexión (En Supabase es stateless, pero mantenemos la función para compatibilidad).
  */
 async function initializeDatabase() {
-  if (db) return; // Evita reinicializar si ya está conectada.
-
   try {
-    db = await open({
-      filename: "./somosbaristas.db", // El archivo de la base de datos
-      driver: sqlite3.Database,
-    });
+    // Verificación simple de conexión
+    const { error } = await supabase.from("product").select("id").limit(1);
+    if (error) throw error;
 
-    // SQL para crear las tablas (si no existen)
-    await db.exec(`
-      CREATE TABLE IF NOT EXISTS product (
-        id INTEGER PRIMARY KEY,
-        name TEXT NOT NULL,
-        price REAL NOT NULL,
-        description TEXT,
-        image_url TEXT
-      );
+    // Mantenimiento automático
+    await deleteOldOrders(30);
 
-      CREATE TABLE IF NOT EXISTS orders (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        products TEXT NOT NULL, -- Almacenaremos el array de productos como un string JSON
-        total REAL NOT NULL,
-        customer_info TEXT, -- Almacenaremos los datos del cliente como un string JSON
-        preferences TEXT,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-      );
-    `);
-
-    console.log("Base de datos SQLite conectada y tablas aseguradas.");
+    console.log("Conexión a Supabase exitosa y lista.");
   } catch (error) {
-    console.error("Error al inicializar la base de datos SQLite:", error);
+    console.error("Error al conectar con Supabase:", error.message);
     process.exit(1); // Detiene la aplicación si la BD no puede iniciar
   }
 }
@@ -48,13 +37,14 @@ async function initializeDatabase() {
  * @returns {Promise<Object>} Un objeto que mapea ID de producto a sus datos { title, price }.
  */
 async function getProductsByIds(productIds) {
-  // Creamos placeholders (?) para cada ID
-  const placeholders = productIds.map(() => "?").join(",");
-  const sql = `SELECT id, name, price FROM product WHERE id IN (${placeholders})`;
+  const { data, error } = await supabase
+    .from("product")
+    .select("id, name, price")
+    .in("id", productIds);
 
-  const rows = await db.all(sql, productIds);
+  if (error) throw error;
 
-  return rows.reduce((acc, product) => {
+  return data.reduce((acc, product) => {
     acc[product.id] = { title: product.name, price: product.price };
     return acc;
   }, {});
@@ -64,8 +54,12 @@ async function getProductsByIds(productIds) {
  * @returns {Promise<Array>} Un array con todos los productos.
  */
 async function getAllProducts() {
-  const sql = "SELECT * FROM product ORDER BY id ASC";
-  return await db.all(sql);
+  const { data, error } = await supabase
+    .from("product")
+    .select("*")
+    .order("id", { ascending: true });
+  if (error) throw error;
+  return data;
 }
 
 /**
@@ -80,34 +74,47 @@ async function getAllProducts() {
 async function createOrder(orderData) {
   const { products, total, customer, preferences } = orderData;
 
-  // Convertimos los objetos a string JSON para guardarlos en SQLite
-  const productsJson = JSON.stringify(products);
-  const customerJson = JSON.stringify(customer);
+  // En Supabase, si la columna es JSONB, pasamos el objeto directo, no stringify.
+  const { data, error } = await supabase
+    .from("orders")
+    .insert({
+      products: products,
+      total: total,
+      customer_info: customer,
+      preferences: preferences,
+    })
+    .select()
+    .single();
 
-  const sql = `
-    INSERT INTO orders (products, total, customer_info, preferences)
-    VALUES (?, ?, ?, ?)
-  `;
+  if (error) throw error;
 
-  const result = await db.run(sql, [
-    productsJson,
-    total,
-    customerJson,
-    preferences,
-  ]);
+  // Supabase ya devuelve los campos JSON como objetos, no necesitamos JSON.parse
+  return data;
+}
 
-  // Devolvemos el pedido recién insertado
-  const newOrder = await db.get(
-    "SELECT * FROM orders WHERE id = ?",
-    result.lastID
-  );
+/**
+ * Elimina los pedidos que tengan más de 'days' días de antigüedad.
+ * Útil para mantener la base de datos ligera.
+ * @param {number} days - Número de días de antigüedad para eliminar.
+ * @returns {Promise<number>} Número de filas eliminadas.
+ */
+async function deleteOldOrders(days = 30) {
+  // Calculamos la fecha límite
+  const dateLimit = new Date();
+  dateLimit.setDate(dateLimit.getDate() - days);
 
-  // Parseamos los campos JSON antes de devolverlos para que sean objetos
-  return {
-    ...newOrder,
-    products: JSON.parse(newOrder.products),
-    customer_info: JSON.parse(newOrder.customer_info),
-  };
+  const { error, count } = await supabase
+    .from("orders")
+    .delete({ count: "exact" })
+    .lt("created_at", dateLimit.toISOString());
+
+  if (error) console.error("Error limpiando órdenes antiguas:", error);
+  else
+    console.log(
+      `Mantenimiento: Se eliminaron órdenes anteriores a ${dateLimit.toISOString()}`
+    );
+
+  return count;
 }
 
 module.exports = {
@@ -115,4 +122,5 @@ module.exports = {
   getProductsByIds,
   getAllProducts,
   createOrder,
+  deleteOldOrders,
 };

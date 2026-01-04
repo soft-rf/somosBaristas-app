@@ -1,16 +1,17 @@
 :root {
   --primary-color: #000000;
-  --secondary-color: #ffffffc6;
+  --secondary-color: #6c757d;
   --background-color: var(--cream-background);
   --button-color: #c4c4c4;
   --button-hover-color: #949494;
   --input-focus-border-color: #6f4e37;
   --font-family: "inter", sans-serif;
   --text-subtle-color: #797979;
+  --cream-background: #ffffff;
+  --success-color: #28a745;
 }
 
 * {
-  background-color: var(--background-color);
   box-sizing: border-box;
   margin: 0;
   padding: 0;

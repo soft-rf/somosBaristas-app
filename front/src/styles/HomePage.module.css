@@ -1,5 +1,9 @@
-/* No se necesitan estilos específicos para HomePage por ahora, 
-   pero creamos el archivo para consistencia. 
-   Los estilos de layout principal están en App.css o global.css */
 .ecommerce {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.ecommerce > main {
+  flex-grow: 1;
 }

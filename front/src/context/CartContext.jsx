@@ -42,6 +42,16 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  const decreaseQuantity = (productId) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === productId
+          ? { ...item, quantity: Math.max(1, item.quantity - 1) }
+          : item
+      )
+    );
+  };
+
   // ¡Aquí está la función que faltaba!
   const clearCart = () => {
     setCartItems([]);
@@ -53,6 +63,7 @@ export const CartProvider = ({ children }) => {
     addToCart,
     removeFromCart,
     updateQuantity,
+    decreaseQuantity, // La añadimos aquí para que esté disponible
     clearCart, // La añadimos aquí para que esté disponible en todo el app
   };
 
