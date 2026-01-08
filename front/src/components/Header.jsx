@@ -35,18 +35,23 @@ const Header = () => {
         </button>
         {/* Usamos Link para navegar a la ruta principal / */}
         <Link to="/" className={styles.headerLogo} aria-label="Inicio">
-          somos <br />
-          Baristas
+          <img
+            src="/image/logo.svg"
+            alt="somos baristas logo"
+            className={styles.logoSvg}
+          />
         </Link>
       </div>
 
       <div className={styles.headerGroupRight}>
+        {/* 
         <div className={styles.headerUser}>
           <span className={styles.headerUserIcon}>
             <img src="/image/user.svg" alt="user icon" />
           </span>
           <span className={styles.headerUserName}>Hola! Usuario</span>
         </div>
+        */}
         {/* Usamos Link para el carrito, apuntando temporalmente a una ruta que crearemos más adelante */}
         <Link to="/cart" className={styles.headerCart} aria-label="Ver carrito">
           <span className={styles.headerCartIcon}>

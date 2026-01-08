@@ -1,0 +1,96 @@
+.footer {
+  background-color: #2d2d2d; /* Tono oscuro para elegancia */
+  color: #a9a9a9; /* Gris claro para texto legible */
+  padding: 3rem 1rem;
+  width: 100%;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 180px;
+}
+
+.footer-section h4 {
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.footer-link {
+  color: #a9a9a9;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* Estilo para los nuevos links de contacto */
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem; /* Espacio entre el ícono y el texto */
+}
+
+.contact-link svg {
+  font-size: 1.2rem; /* Tamaño del ícono de contacto */
+}
+
+.social-icons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.social-link {
+  color: #a9a9a9;
+  font-size: 1.8rem; /* Íconos más grandes */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-link:hover {
+  color: #ffffff;
+  transform: translateY(-2px); /* Efecto sutil al pasar el mouse */
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #444;
+  padding-top: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.footer-bottom p {
+  margin: 0.3rem 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-section {
+    align-items: center;
+  }
+}

@@ -7,18 +7,24 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  /* La altura es necesaria para que el centrado absoluto funcione bien */
+  height: 70px; 
 }
 
 .headerGroupLeft {
   display: flex;
   align-items: center;
   gap: 15px;
+  /* Asegura que el grupo izquierdo tenga un ancho definido para balancear el derecho */
+  flex: 1; 
 }
 
 .headerGroupRight {
   display: flex;
   align-items: center;
+  justify-content: flex-end; /* Alinea los items a la derecha */
   gap: 20px;
+  flex: 1;
 }
 
 .menuButton {
@@ -32,14 +38,19 @@
 
 /* --- LOGO --- */
 .headerLogo {
-  font-size: 18px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px; /* Tamaño aumentado */
   font-weight: 700;
   line-height: 1;
   text-decoration: none;
   color: var(--primary-color);
+  text-align: center; /* Asegura que el texto de dos líneas esté centrado */
 }
 
-/* --- USUARIO --- */
+/* --- USUARIO (Comentado en JSX, sin cambios aquí) --- */
 .headerUser {
   display: flex;
   align-items: center;
@@ -82,4 +93,11 @@
   padding: 1px 5px;
   font-size: 10px;
   line-height: 1;
+}
+
+
+
+.logoSvg {
+  height: 55px;
+  width: auto;
 }
