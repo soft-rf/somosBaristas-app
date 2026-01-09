@@ -36,7 +36,7 @@
 /* 3. ENCABEZADO Y BOTÓN CERRAR */
 /* ========================================================= */
 .menuHeader {
-  padding: 1rem;
+  padding: 0.5rem;
   display: flex;
   justify-content: flex-end;
   border-bottom: 1px solid #eee;
@@ -50,6 +50,11 @@
   font-size: 2rem;
   cursor: pointer;
   color: #333;
+  transition: color 0.2s;
+}
+
+.closeButton:hover {
+  color: #c50000;
 }
 
 /* ========================================================= */
@@ -108,6 +113,8 @@
   color: #333; /* Color de texto oscuro */
   margin: 0;
   flex-grow: 1; /* Empuja el botón de cerrar a la derecha */
+  width: 60%;
+  height: auto;
 }
 
 .submenuWrapper {

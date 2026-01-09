@@ -125,7 +125,11 @@ const MenuPopup = ({ onClose }) => {
       >
         <div className={styles.menuHeader}>
           {/* Agregamos el logo de la marca en el menú (opcional) */}
-          <h2 className={styles.menuBrandTitle}>somos Baristas</h2>
+          <img
+            src="/image/logo.svg"
+            alt="somos Baristas"
+            className={styles.menuBrandTitle}
+          />
           <button
             className={styles.closeButton}
             onClick={handleClose}

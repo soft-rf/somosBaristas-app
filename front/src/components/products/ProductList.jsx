@@ -19,18 +19,55 @@ const productData = [
     ],
   },
   {
+    id: "prod-2",
+    title: "En grano x 500gr",
+    imageSrc: "/image/500gr.png",
+    altText: "Bolsa de café en grano de 500 gramos",
+    price: "$ 900",
+    options: [
+      { label: "Perú", dataOrigin: "peru", dataId: "c500-peru" },
+      { label: "Brasil", dataOrigin: "brasil", dataId: "c500-brasil" },
+      { label: "Colombia", dataOrigin: "colombia", dataId: "c500-colombia" },
+    ],
+  },
+  {
     id: "prod-3",
     title: "MOLINOS MANUALES",
     imageSrc: "/image/molino-manual.png",
     altText: "Molino manual de café",
     price: "$ 79.500",
-    isAvailable: false,
+    isAvailable: true,
     // Las opciones singulares (molino y balanza) se manejan con un array de 1
     options: [
       {
-        label: "Semi - profesional",
-        dataOrigin: "semi",
-        dataId: "molino-semi",
+        label: "Modelo 1",
+        dataOrigin: "modelo1",
+        dataId: "molino-modelo1",
+      },
+      {
+        label: "Modelo 2",
+        dataOrigin: "modelo2",
+        dataId: "molino-modelo2",
+      },
+    ],
+  },
+  {
+    id: "prod-5",
+    title: "Cafeteras de filtro",
+    imageSrc: "/image/cafetera-filtro.png",
+    altText: "Cafetera de filtro manual",
+    price: "$ 65.000",
+    isAvailable: true,
+    options: [
+      {
+        label: "Modelo 1",
+        dataOrigin: "modelo1",
+        dataId: "cafetera-modelo1",
+      },
+      {
+        label: "Modelo 2",
+        dataOrigin: "modelo2",
+        dataId: "cafetera-modelo2",
       },
     ],
   },
@@ -40,12 +77,17 @@ const productData = [
     imageSrc: "/image/balanza.png",
     altText: "Balanza digital con cronómetro",
     price: "$ 50.000",
-    isAvailable: false,
+    isAvailable: true,
     options: [
       {
-        label: "Semi - profesional",
-        dataOrigin: "semi",
-        dataId: "balanza-semi",
+        label: "Modelo 1",
+        dataOrigin: "modelo1",
+        dataId: "balanza-modelo1",
+      },
+      {
+        label: "Modelo 2",
+        dataOrigin: "modelo2",
+        dataId: "balanza-modelo2",
       },
     ],
   },
