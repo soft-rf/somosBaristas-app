@@ -7,7 +7,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6); /* Un poco más sutil */
   z-index: 1000;
   display: flex;
   justify-content: flex-start;
@@ -18,14 +18,13 @@
 /* 2. MENÚ LATERAL (SIDE NAV) */
 /* ========================================================= */
 .menuPopupContent {
-  width: 80%;
-  max-width: 300px;
+  width: 90%; /* Más flexible en pantallas pequeñas */
+  max-width: 320px; /* Un ancho máximo ligeramente mayor */
   height: 100%;
-  background-color: #fff;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-
+  background-color: var(--cream-background); /* Usar variable global */
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2); /* Sombra más suave y extendida */
   transform: translateX(-100%);
-  transition: transform 0.3s ease-out;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1); /* Transición más fluida */
 }
 
 .menuPopupContent.isOpen {
@@ -36,25 +35,34 @@
 /* 3. ENCABEZADO Y BOTÓN CERRAR */
 /* ========================================================= */
 .menuHeader {
-  padding: 0.5rem;
+  padding: 0.75rem 1rem; /* Ajuste de padding */
   display: flex;
-  justify-content: flex-end;
-  border-bottom: 1px solid #eee;
-  align-items: center; /* Centrado vertical */
-  gap: 1rem; /* Espacio entre el título y el botón de cerrar */
+  justify-content: space-between; /* Asegura espacio entre logo y botón */
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08); /* Borde más sutil */
+}
+
+.menuBrandTitle {
+  width: auto; /* Dejar que el tamaño se ajuste al contenido */
+  height: 35px; /* Altura fija para el logo */
+  flex-grow: 0; /* No debe crecer */
 }
 
 .closeButton {
   background: none;
   border: none;
-  font-size: 2rem;
+  font-size: 1.8rem; /* Tamaño reducido */
+  font-weight: 300; /* Más fino */
   cursor: pointer;
-  color: #333;
-  transition: color 0.2s;
+  color: var(--secondary-color); /* Usar variable */
+  transition: transform 0.2s, color 0.2s;
+  padding: 0.5rem;
+  line-height: 1;
 }
 
 .closeButton:hover {
-  color: #c50000;
+  color: var(--primary-color);
+  transform: rotate(90deg); /* Efecto de giro al pasar el mouse */
 }
 
 /* ========================================================= */
@@ -62,25 +70,26 @@
 /* ========================================================= */
 .menuList {
   list-style: none;
-  padding: 0;
+  padding: 0.5rem 0; /* Espacio arriba y abajo */
   margin: 0;
 }
 
 .menuItem {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Borde aún más sutil */
 }
 
 .menuLink {
   display: block;
-  padding: 1rem;
-  color: #333;
+  padding: 0.9rem 1.2rem; /* Padding ajustado */
+  color: var(--primary-color);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 500; /* Ligeramente más grueso */
+  font-size: 1rem;
   transition: background-color 0.2s;
 }
 
 .menuLink:hover {
-  background-color: #f9f9f9;
+  background-color: rgba(0, 0, 0, 0.03); /* Hover sutil */
 }
 
 .menuLinkDropdownToggle {
@@ -95,8 +104,10 @@
 }
 
 .dropdownIcon {
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.3s ease-in-out;
   display: inline-block;
+  font-size: 0.8rem; /* Icono más pequeño */
+  color: var(--secondary-color);
 }
 
 .dropdownIcon.open {
@@ -104,62 +115,48 @@
 }
 
 /* ========================================================= */
-/* CSS para Contenido Interno (Texto y Sub-links) */
+/* 5. CONTENIDO INTERNO (TEXTO Y SUB-LINKS) */
 /* ========================================================= */
-
-.menuBrandTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333; /* Color de texto oscuro */
-  margin: 0;
-  flex-grow: 1; /* Empuja el botón de cerrar a la derecha */
-  width: 60%;
-  height: auto;
-}
-
 .submenuWrapper {
-  background-color: #f8f8f8;
+  background-color: rgba(0, 0, 0, 0.02); /* Fondo muy sutil para el desplegable */
   overflow: hidden;
-  transition: max-height 0.3s ease-out;
+  transition: max-height 0.4s ease-in-out; /* Transición más lenta */
   max-height: 0;
 }
 
-/* Contenedor del contenido desplegado */
 .submenuContent {
-  padding: 0 1rem 1rem 1rem;
+  padding: 0 1.2rem 1rem 1.2rem; /* Mismo padding que los enlaces principales */
   overflow: hidden;
 }
 
-/* Estilo para el texto informativo dentro de los desplegables */
 .menuInfoText {
-  font-size: 0.95rem;
-  color: #555;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  color: var(--secondary-color); /* Color de texto sutil */
+  line-height: 1.6;
   margin: 0;
-  padding: 0;
+  padding-top: 1rem; /* Espacio para que no se pegue al abrir */
 }
 
-/* Ajuste para los sub-links de contacto */
 .submenuList {
-  padding: 0;
+  padding: 0.5rem 0;
   list-style: none;
 }
 
 .submenuItem {
-  padding: 0.25rem 0;
+  padding: 0;
 }
 
-/* Asegura que los enlaces de contacto se vean bien */
 .submenuLink {
   display: block;
-  padding: 0.5rem 0; /* Espacio vertical */
-  color: #007bff; /* Color de enlace, puedes usar el color de tu marca */
+  padding: 0.6rem 0;
+  color: #6f4e37; /* Color café para los enlaces de contacto */
   font-weight: 500;
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color 0.2s, padding-left 0.2s;
 }
 
 .submenuLink:hover {
-  color: #0056b3;
-  text-decoration: underline;
+  color: var(--primary-color);
+  padding-left: 5px; /* Pequeño desplazamiento al pasar el mouse */
+  text-decoration: none;
 }

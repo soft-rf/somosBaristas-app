@@ -9,7 +9,7 @@ const coffeeData = [
   {
     id: "prod-1",
     title: "En grano x 250gr",
-    imageSrc: "/image/300gr.png", // La ruta debe coincidir con public/image/
+    imageSrc: "/image/granos_café.jpg", // La ruta debe coincidir con public/image/
     altText: "Bolsa de café en grano de 300 gramos",
     price: "$ 500",
     options: [
@@ -21,7 +21,7 @@ const coffeeData = [
   {
     id: "prod-2",
     title: "En grano x 500gr",
-    imageSrc: "/image/500gr.png",
+    imageSrc: "/image/granos_café.jpg",
     altText: "Bolsa de café en grano de 500 gramos",
     price: "$ 900",
     options: [

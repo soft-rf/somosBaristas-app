@@ -5,7 +5,7 @@ export const MOCK_PRODUCTS = [
     formato: "250 gramos",
     precioUnitario: 12.5, // Precio en USD o la moneda local
     stockDisponible: 50,
-    imagen: "/image/300gr.png", // Usamos una de tus imágenes de mock
+    imagen: "/image/granos_café.jpg", // Usamos una de tus imágenes de mock
   },
   {
     id: "colombia-500g",
@@ -13,7 +13,7 @@ export const MOCK_PRODUCTS = [
     formato: "500 gramos",
     precioUnitario: 22.0,
     stockDisponible: 25,
-    imagen: "/image/500gr.png",
+    imagen: "/image/granos_café.jpg",
   },
   {
     id: "brasil-1000g",
