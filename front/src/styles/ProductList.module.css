@@ -6,6 +6,33 @@
   min-height: 100vh;
 }
 
+.categoryBadge,
+.categoryBadgeAccessories {
+  align-self: center;
+  background-size: cover;
+  background-position: center;
+  border-radius: 100px;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-transform: lowercase;
+  width: 95%;
+  max-width: 370px;
+  padding: 5px 0;
+  font-size: 24px;
+  text-align: center;
+}
+
+.categoryBadge {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/image/fondo-titulo-cafe.png");
+}
+
+.categoryBadgeAccessories {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/image/fondo-titulo-accesorios.png");
+}
+
 @media (min-width: 768px) {
   .productList {
     padding: 0 40px;

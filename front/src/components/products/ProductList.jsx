@@ -4,11 +4,11 @@ import React from "react";
 import styles from "../../styles/ProductList.module.css";
 import ProductItem from "./ProductItem";
 
-// Define los datos de los 4 productos (Hardcodeado por ahora)
-const productData = [
+// Define los datos de los productos de Café
+const coffeeData = [
   {
     id: "prod-1",
-    title: "En grano x 300gr",
+    title: "En grano x 250gr",
     imageSrc: "/image/300gr.png", // La ruta debe coincidir con public/image/
     altText: "Bolsa de café en grano de 300 gramos",
     price: "$ 500",
@@ -30,6 +30,9 @@ const productData = [
       { label: "Colombia", dataOrigin: "colombia", dataId: "c500-colombia" },
     ],
   },
+];
+
+const accessoriesData = [
   {
     id: "prod-3",
     title: "MOLINOS MANUALES",
@@ -96,12 +99,17 @@ const productData = [
 const ProductList = () => {
   return (
     <section className={styles.productList}>
-      {/* Mapeamos los datos para crear una ProductItem por cada producto */}
-      {productData.map((product) => (
+      <div className={styles.categoryBadge}>café</div>
+      {coffeeData.map((product) => (
         <ProductItem
           key={product.id} // Usar un ID único en lugar del índice
           {...product}
         />
+      ))}
+
+      <div className={styles.categoryBadgeAccessories}>accesorios</div>
+      {accessoriesData.map((product) => (
+        <ProductItem key={product.id} {...product} />
       ))}
     </section>
   );
