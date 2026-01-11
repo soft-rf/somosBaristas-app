@@ -1,115 +1,67 @@
-// src/components/products/ProductList.jsx
-
 import React from "react";
-import styles from "../../styles/ProductList.module.css";
 import ProductItem from "./ProductItem";
-
-// Define los datos de los productos de Café
-const coffeeData = [
-  {
-    id: "prod-1",
-    title: "En grano x 250gr",
-    imageSrc: "/image/granos_café.jpg", // La ruta debe coincidir con public/image/
-    altText: "Bolsa de café en grano de 300 gramos",
-    price: "$ 500",
-    options: [
-      { label: "Perú", dataOrigin: "peru", dataId: "c300-peru" },
-      { label: "Brasil", dataOrigin: "brasil", dataId: "c300-brasil" },
-      { label: "Colombia", dataOrigin: "colombia", dataId: "c300-colombia" },
-    ],
-  },
-  {
-    id: "prod-2",
-    title: "En grano x 500gr",
-    imageSrc: "/image/granos_café.jpg",
-    altText: "Bolsa de café en grano de 500 gramos",
-    price: "$ 900",
-    options: [
-      { label: "Perú", dataOrigin: "peru", dataId: "c500-peru" },
-      { label: "Brasil", dataOrigin: "brasil", dataId: "c500-brasil" },
-      { label: "Colombia", dataOrigin: "colombia", dataId: "c500-colombia" },
-    ],
-  },
-];
-
-const accessoriesData = [
-  {
-    id: "prod-3",
-    title: "MOLINOS MANUALES",
-    imageSrc: "/image/molino-manual.png",
-    altText: "Molino manual de café",
-    price: "$ 79.500",
-    isAvailable: true,
-    // Las opciones singulares (molino y balanza) se manejan con un array de 1
-    options: [
-      {
-        label: "Modelo 1",
-        dataOrigin: "modelo1",
-        dataId: "molino-modelo1",
-      },
-      {
-        label: "Modelo 2",
-        dataOrigin: "modelo2",
-        dataId: "molino-modelo2",
-      },
-    ],
-  },
-  {
-    id: "prod-5",
-    title: "Cafeteras de filtro",
-    imageSrc: "/image/cafetera-filtro.png",
-    altText: "Cafetera de filtro manual",
-    price: "$ 65.000",
-    isAvailable: true,
-    options: [
-      {
-        label: "Modelo 1",
-        dataOrigin: "modelo1",
-        dataId: "cafetera-modelo1",
-      },
-      {
-        label: "Modelo 2",
-        dataOrigin: "modelo2",
-        dataId: "cafetera-modelo2",
-      },
-    ],
-  },
-  {
-    id: "prod-4",
-    title: "Balanza",
-    imageSrc: "/image/balanza.png",
-    altText: "Balanza digital con cronómetro",
-    price: "$ 50.000",
-    isAvailable: true,
-    options: [
-      {
-        label: "Modelo 1",
-        dataOrigin: "modelo1",
-        dataId: "balanza-modelo1",
-      },
-      {
-        label: "Modelo 2",
-        dataOrigin: "modelo2",
-        dataId: "balanza-modelo2",
-      },
-    ],
-  },
-];
+import { MOCK_PRODUCTS } from "../../data/productMocks";
+import styles from "../../styles/ProductList.module.css";
 
 const ProductList = () => {
+  // Función para agrupar productos por nombre (ej. "Café en Grano")
+  const groupProducts = (products) => {
+    const grouped = {};
+    products.forEach((p) => {
+      // Extrae el nombre base del producto, ignorando el peso/formato
+      const name = p.name.replace(/\s\d+gr|\s\d+kg/i, "").trim();
+      if (!grouped[name]) {
+        grouped[name] = {
+          title: name,
+          imageSrc: p.imagen,
+          altText: `Imagen de ${name}`,
+          options: [],
+          // isAvailable will be determined by the options, but for now let's say true if at least one is available
+          isAvailable: products.some(prod => prod.name.startsWith(name) && prod.stockDisponible > 0),
+        };
+      }
+      grouped[name].options.push({
+        label: p.formato,
+        dataId: p.id,
+        dataOrigin: p.origen,
+      });
+    });
+    return Object.values(grouped);
+  };
+
+  const coffeeProducts = MOCK_PRODUCTS.filter(p => p.origen !== 'Accesorio');
+  const accessoryProducts = MOCK_PRODUCTS.filter(p => p.origen === 'Accesorio');
+
+  const groupedCoffee = groupProducts(coffeeProducts);
+
   return (
     <section className={styles.productList}>
       <div className={styles.categoryBadge}>café</div>
-      {coffeeData.map((product) => (
+      {groupedCoffee.map((product, index) => (
         <ProductItem
-          key={product.id} // Usar un ID único en lugar del índice
-          {...product}
+          key={index}
+          title={product.title}
+          imageSrc={product.imageSrc}
+          altText={product.altText}
+          options={product.options}
+          isAvailable={product.isAvailable}
         />
       ))}
 
       <div className={styles.categoryBadgeAccessories}>accesorios</div>
-      {accessoriesData.map((product) => (
-        <ProductItem key={product.id} {...product} />
+      {accessoryProducts.map((product) => (
+        <ProductItem
+            key={product.id}
+            title={product.name}
+            imageSrc={product.imagen}
+            altText={`Imagen de ${product.name}`}
+            options={[{
+                label: product.formato,
+                dataId: product.id,
+                dataOrigin: product.origen
+            }]}
+            isAvailable={product.stockDisponible > 0}
+        />
       ))}
     </section>
   );

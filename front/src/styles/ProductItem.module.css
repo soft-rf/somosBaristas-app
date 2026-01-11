@@ -3,25 +3,42 @@
   background-color: var(--background-color);
   border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08), 0 -3px 8px rgba(0, 0, 0, 0.02);
   width: 100%;
 }
 
-/* --- IMAGEN --- */
+.productImageContainer {
+  position: relative;
+  /* width: 40%; */ /* Se moverá a las media queries */
+  flex-shrink: 0; /* Evita que el contenedor se encoja */
+}
 
 .productImage {
-  width: 40%;
-  height: auto;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   background-color: transparent;
   border-radius: 20px;
   padding: 5px;
+  display: block;
+}
+
+.imageWatermark {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 300; /* Fuente fina */
+  font-style: italic;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  pointer-events: none; /* Para que no interfiera con el ratón */
 }
 
 /* --- DETALLES --- */
 
 .productDetails {
-  width: 55%;
+  /* width: 55%; */ /* Se ajustará en las media queries */
   padding: 10px 15px;
   background-color: var(--background-color);
   display: flex;
@@ -39,15 +56,28 @@
   margin-bottom: 10px;
 }
 
-/* --- GRUPO DE OPCIONES Y BOTONES --- */
+/* --- SECCIÓN DE OPCIONES --- */
 
 .productOptions {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 1.5rem; /* Aumentado para separar más las opciones */
 }
 
+/* Contenedor para una opción (botones, precio, etc.) */
+.optionContainer {
+  position: relative;
+  padding-top: 25px; /* Añadido para simetría */
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee; /* Separador visual */
+}
+
+.optionContainer:last-child {
+  border-bottom: none; /* No mostrar separador en el último elemento */
+}
+
+/* Grupo de botones para una opción */
 .optionGroup {
   display: flex;
   align-items: center;
@@ -59,11 +89,11 @@
 .addButton {
   padding: 4px 8px;
   border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
-  flex-shrink: 0; /* Evita que los botones se encojan */
+  flex-shrink: 0;
 }
 
 .detailButton {
@@ -72,9 +102,9 @@
   padding: 0;
   font-size: 12px;
   color: var(--text-subtle-color);
-  text-decoration: underline;
+  text-decoration: none;
   cursor: pointer;
-  margin: 0 auto; /* Centrarlo si es el único botón */
+  margin: 0 auto;
 }
 
 .optionButton {
@@ -95,26 +125,29 @@
   font-weight: 600;
 }
 
-/* --- PRECIO --- */
+/* --- PRECIO DE LA OPCIÓN --- */
 
-.productPrice {
-  font-size: 24px;
+.optionPrice {
+  font-size: 20px;
   font-style: italic;
   font-weight: 500;
   color: var(--text-subtle-color);
-  margin-top: 15px;
-  margin-bottom: 5px;
   text-align: right;
+  margin-top: 8px;
 }
 
 /* --- MENSAJE DE CONFIRMACIÓN --- */
+
 .confirmationMessage {
-  font-size: 16px;
-  color: var(--success-color); /* Un color verde para éxito */
+  font-size: 14px;
+  color: var(--success-color);
   font-weight: 500;
   text-align: right;
-  margin-top: 8px;
-  animation: fadeIn 0.2s ease-out;
+  margin-top: 4px;
+  animation: fadeIn 0.3s ease-out;
+  position: absolute;
+  bottom: -15px; /* Posicionarlo debajo del contenedor */
+  right: 0;
 }
 
 @keyframes fadeIn {
@@ -126,32 +159,32 @@
   }
 }
 
+/* --- MEDIA QUERIES --- */
+
 @media (min-width: 768px) {
   .productItem {
     flex-direction: row;
   }
-
-  .productImage {
+  .productImageContainer {
     width: 35%;
-    height: 100%;
+  }
+  .productImage {
     border-radius: 8px;
   }
-
   .productDetails {
     width: 65%;
     padding: 10px;
   }
-
   .optionButton,
   .addButton {
     padding: 8px 15px;
-    font-size: 14px;
+    font-size: 16px;
   }
   .productTitle {
     font-size: 20px;
   }
-  .productPrice {
-    font-size: 26px;
+  .optionPrice {
+    font-size: 22px;
   }
 }
 
@@ -159,24 +192,22 @@
   .productItem {
     flex-direction: column;
   }
-
-  .productImage {
+  .productImageContainer {
     width: 100%;
+  }
+  .productImage {
     height: 180px;
     border-radius: 8px 8px 0 0;
   }
-
   .productDetails {
     width: 100%;
   }
-
   .optionGroup {
     flex-direction: row;
     align-items: center;
     gap: 5px;
   }
-
-  .productPrice {
+  .optionPrice {
     text-align: right;
     margin-top: 10px;
   }

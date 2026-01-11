@@ -1,10 +1,61 @@
 .comboHero {
-  padding: 20px 0;
+  padding: 15px 15px;
   text-align: center;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  background-color: #fafafa;
 }
 
 .comboHeroInfo {
-  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
   color: var(--text-subtle-color);
+  margin: 0 auto;
+  max-width: 800px; /* Limita el ancho máximo */
+}
+
+.infoSection {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.separator {
+  width: 1px;
+  height: 40px; /* Altura de la línea separadora */
+  background-color: #ccc;
+}
+
+.blogLink {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: text-decoration 0.2s;
+  font-size: 14px;
+}
+
+.blogLink:hover {
+  text-decoration: underline;
+}
+
+.shippingOffer {
   margin: 0;
+  font-weight: 400;
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.shippingOffer strong {
+  font-weight: 700; /* Hace que 'envíos gratis' sea más audaz */
+  text-transform: uppercase;
+  margin-left: 5px;
+}
+
+.infoIcon {
+  margin-right: 8px;
+  color: var(--primary-color);
+  flex-shrink: 0; /* Evita que el icono se encoja si no hay espacio */
 }

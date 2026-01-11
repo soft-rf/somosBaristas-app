@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,56 +13,85 @@
 
 .popupContent {
   background-color: #fff;
-  padding: 30px;
   border-radius: 8px;
   max-width: 90%;
   width: 500px;
   position: relative;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  max-height: 80vh;
-  overflow-y: auto;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Ensures content respects border-radius */
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+}
+
+.productImage {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  display: block;
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 24px;
+  z-index: 1;
+  transition: background-color 0.2s;
+}
+
+.navButton:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.prevButton {
+  left: 10px;
+  border-radius: 5px 0 0 5px;
+}
+
+.nextButton {
+  right: 10px;
+  border-radius: 0 5px 5px 0;
 }
 
 .closeButton {
   position: absolute;
   top: 10px;
   right: 15px;
-  background: none;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
   border: none;
-  font-size: 28px;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
   cursor: pointer;
-  color: #888;
+  color: #fff;
+  z-index: 10;
 }
 
 .detailsView {
-  text-align: center;
+  padding: 20px;
+  overflow-y: auto;
 }
 
 .originText {
-  white-space: pre-wrap; /* Mantiene los saltos de línea del texto */
-  font-family: inherit; /* Usa la fuente del resto de la app */
+  white-space: pre-wrap;
+  font-family: inherit;
   font-size: 14px;
-  color: var(--primary-color);
-  text-align: left;
+  color: #333;
   line-height: 1.6;
-}
-
-.nextButton {
-  margin-top: 20px;
-  background-color: var(--primary-color);
-  color: var(--background-color);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.nextButton:hover {
-  background-color: #333;
-}
-
-.imageView {
-  text-align: center;
-  padding: 40px 0;
+  font-weight: 400;
+  text-align: left;
 }

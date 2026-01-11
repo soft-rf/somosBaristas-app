@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import styles from "../../styles/ProductDetailPopup.module.css";
 
-const ProductDetailPopup = ({ originDetails, onClose }) => {
-  const [showImage, setShowImage] = useState(false);
+const ProductDetailPopup = ({ originDetails, onClose, imageSrc, detailImages }) => {
+  const images = (detailImages && detailImages.length > 0) ? detailImages : [imageSrc];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const handleNextClick = () => {
-    setShowImage(true);
+  const goToNextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const goToPreviousImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
   return (
@@ -14,19 +19,20 @@ const ProductDetailPopup = ({ originDetails, onClose }) => {
         <button className={styles.closeButton} onClick={onClose}>
           &times;
         </button>
-        {!showImage ? (
-          <div className={styles.detailsView}>
+        
+        <div className={styles.imageContainer}>
+          <img src={images[currentImageIndex]} alt="Detalle del producto" className={styles.productImage} />
+          {images.length > 1 && (
+            <>
+              <button onClick={goToPreviousImage} className={`${styles.navButton} ${styles.prevButton}`}>&#10094;</button>
+              <button onClick={goToNextImage} className={`${styles.navButton} ${styles.nextButton}`}>&#10095;</button>
+            </>
+          )}
+        </div>
+
+        <div className={styles.detailsView}>
             <pre className={styles.originText}>{originDetails}</pre>
-            <button className={styles.nextButton} onClick={handleNextClick}>
-              Ver imagen →
-            </button>
-          </div>
-        ) : (
-          <div className={styles.imageView}>
-            <p>Próximamente una imagen aquí.</p>
-            <button onClick={() => setShowImage(false)}>← Volver</button>
-          </div>
-        )}
+        </div>
       </div>
     </div>
   );
