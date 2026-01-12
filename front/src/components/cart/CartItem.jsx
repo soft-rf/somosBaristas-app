@@ -20,6 +20,7 @@ const CartItem = ({ item }) => {
       <img src={item.imageSrc} alt={item.title} className={styles.itemImage} />
       <div className={styles.itemDetails}>
         <p className={styles.itemTitle}>{item.title}</p>
+        {item.grind && <p className={styles.itemGrind}>Molienda: {item.grind.replace('-', ' ')}</p>}
         <p className={styles.itemPrice}>{formatPrice(item.price)}</p>
       </div>
       <div className={styles.itemActions}>

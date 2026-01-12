@@ -15,6 +15,7 @@ const ProductItem = ({
   const [showConfirmation, setShowConfirmation] = useState(null); // Store the ID of the confirmed product
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupDetails, setPopupDetails] = useState('');
+  const [grind, setGrind] = useState('en-grano');
 
   // Check if the product is coffee to apply the watermark
   const isCoffee = title.toLowerCase().includes('café');
@@ -36,6 +37,7 @@ const ProductItem = ({
       price: product.precioUnitario,
       imageSrc,
       quantity: 1,
+      grind: isCoffee ? grind : null,
     };
     addToCart(productToAdd);
     setShowConfirmation(product.id); // Show confirmation for this specific product
@@ -67,7 +69,23 @@ const ProductItem = ({
                   {product.formato}
                 </button>
 
-                {isAvailable && (
+                {isAvailable && isCoffee && (
+                  <>
+                    <select name="grinding" id="grinding" className="grinding-select" onChange={(e) => setGrind(e.target.value)}>
+                      <option value="en-grano">En grano</option>
+                      <option value="espresso">Espresso - Fino</option>
+                      <option value="aeropress">Aero press - No tan fino</option>
+                      <option value="v60">V60 - Medio</option>
+                      <option value="chemex">Chemex - un poco más que medio</option>
+                      <option value="prensa">Prensa - grueso</option>
+                    </select>
+                    <button className={styles.detailButton} onClick={() => openPopup(product.description)}>
+                      Ver detalle
+                    </button>
+                  </>
+                )}
+
+                {isAvailable && !isCoffee && (
                   <button className={styles.detailButton} onClick={() => openPopup(product.description)}>
                     Ver detalle
                   </button>
