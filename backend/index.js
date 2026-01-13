@@ -11,7 +11,13 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // 3. Middlewares
-app.use(cors()); // Permite la comunicación entre frontend y backend
+// Configuración profesional de CORS:
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "*", // En producción usará la URL de Vercel, en local permite todo
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 app.use(express.json()); // Permite al servidor entender JSON que viene en las peticiones
 
 // 4. Ruta de prueba

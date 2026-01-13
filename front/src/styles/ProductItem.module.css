@@ -68,7 +68,7 @@
 /* Contenedor para una opción (botones, precio, etc.) */
 .optionContainer {
   position: relative;
-  padding-top: 25px; /* Añadido para simetría */
+  padding-top: 5px; /* Añadido para simetría */
   padding-bottom: 5px;
   border-bottom: 1px solid #eee; /* Separador visual */
 }
@@ -189,135 +189,80 @@
 }
 
 @media (max-width: 767px) {
-
   .productItem {
-
     flex-direction: column;
-
   }
 
   .productImageContainer {
-
     width: 100%;
-
   }
 
   .productImage {
-
     height: 180px;
 
     border-radius: 8px 8px 0 0;
-
   }
 
   .productDetails {
-
     width: 100%;
 
     padding: 5px 10px;
-
   }
 
   .optionGroup {
-
     flex-direction: row;
 
     flex-wrap: wrap;
 
     gap: 10px;
-
   }
 
   .grinding-select {
-
     width: 100%;
-
   }
 
   .addButton,
-
   .detailButton {
-
     flex-grow: 1;
-
   }
 
   .optionPrice {
-
     text-align: right;
 
     margin-top: 10px;
-
   }
 
   .productTitle {
-
     font-size: 18px;
-
   }
-
 }
 
-
-
 .grinding-select {
-
-
-
   background: transparent;
-
-
 
   border: 1px solid #ccc;
 
-
-
   border-radius: 4px;
-
-
 
   padding: 3px; /* Smaller padding */
 
-
-
   font-size: 12px; /* Smaller font size */
-
-
 
   color: #333;
 
-
-
   width: 100px; /* Fixed width */
-
-
 
   -webkit-appearance: none;
 
-
-
   -moz-appearance: none;
-
-
 
   appearance: none;
 
-
-
   background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-
-
 
   background-repeat: no-repeat;
 
-
-
   background-position: right 8px center;
 
-
-
   padding-right: 30px;
-
-
-
 }

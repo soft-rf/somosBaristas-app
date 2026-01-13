@@ -8,7 +8,11 @@ import styles from "../styles/CartPage.module.css";
 
 const CartPage = () => {
   const { cartItems } = useCart();
-  const shippingCost = 3900; // Costo de envío fijo
+
+  // Calcular cantidad total de productos (unidades)
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  // Lógica de envío: Base 2000, Gratis si hay 2 o más productos/unidades
+  const shippingCost = totalItems >= 2 ? 0 : 2000;
 
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -52,11 +56,17 @@ const CartPage = () => {
               <div className={styles.summaryRow}>
                 <span>Envío</span>
                 <span>
-                  {new Intl.NumberFormat("es-AR", {
-                    style: "currency",
-                    currency: "ARS",
-                    minimumFractionDigits: 0,
-                  }).format(shippingCost)}
+                  {shippingCost === 0 ? (
+                    <span style={{ color: "#2e7d32", fontWeight: "bold" }}>
+                      ¡Gratis!
+                    </span>
+                  ) : (
+                    new Intl.NumberFormat("es-AR", {
+                      style: "currency",
+                      currency: "ARS",
+                      minimumFractionDigits: 0,
+                    }).format(shippingCost)
+                  )}
                 </span>
               </div>
               <div className={`${styles.summaryRow} ${styles.summaryTotal}`}>

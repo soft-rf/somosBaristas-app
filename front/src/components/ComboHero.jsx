@@ -4,7 +4,9 @@ import styles from "../styles/ComboHero.module.css";
 const ComboHero = () => {
   const handleBlogLinkClick = (e) => {
     e.preventDefault();
-    alert("estamos trabajando en esta seccion, pero la idea es una guía simple sobre metodos de preparacion y recetas del café para que encuentres la que mas te guste y apartir de ahi hacer vos tus propios experimentos");
+    alert(
+      "estamos trabajando en esta seccion, pero la idea es una guía simple sobre metodos de preparacion y recetas del café para que encuentres la que mas te guste y apartir de ahi hacer vos tus propios experimentos"
+    );
   };
 
   return (
@@ -32,7 +34,9 @@ const ComboHero = () => {
         </div>
         <div className={styles.separator}></div>
         <div className={styles.infoSection}>
-          <p className={styles.shippingOffer}>a partir de 2 cafés <strong>envíos gratis</strong></p>
+          <p className={styles.shippingOffer}>
+            a partir de 2 productos <strong>envíos gratis</strong>
+          </p>
         </div>
       </div>
     </section>

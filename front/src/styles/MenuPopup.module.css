@@ -43,8 +43,8 @@
 }
 
 .menuBrandTitle {
-  width: auto; /* Dejar que el tamaño se ajuste al contenido */
-  height: 35px; /* Altura fija para el logo */
+  width: 200px; /* Dejar que el tamaño se ajuste al contenido */
+  height: 80px; /* Altura fija para el logo */
   flex-grow: 0; /* No debe crecer */
 }
 
@@ -118,7 +118,12 @@
 /* 5. CONTENIDO INTERNO (TEXTO Y SUB-LINKS) */
 /* ========================================================= */
 .submenuWrapper {
-  background-color: rgba(0, 0, 0, 0.02); /* Fondo muy sutil para el desplegable */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.02
+  ); /* Fondo muy sutil para el desplegable */
   overflow: hidden;
   transition: max-height 0.4s ease-in-out; /* Transición más lenta */
   max-height: 0;

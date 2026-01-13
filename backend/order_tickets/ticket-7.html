@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ticket de Pedido #7 - SomosBaristas</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        color: #333;
+        line-height: 1.6;
+      }
+      .ticket-container {
+        width: 300px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        padding: 15px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+      }
+      .header {
+        text-align: center;
+        border-bottom: 1px dashed #ccc;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+        color: #4a4a4a;
+      }
+      .header p {
+        font-size: 14px;
+        color: #777;
+      }
+      .order-details,
+      .customer-details,
+      .items {
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+      .order-details strong,
+      .customer-details strong {
+        display: inline-block;
+        width: 80px;
+      }
+      .items table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 5px;
+      }
+      .items th,
+      .items td {
+        border-top: 1px dashed #eee;
+        padding: 5px 0;
+        text-align: left;
+      }
+      .items th {
+        text-align: center;
+      }
+      .items td:nth-child(2) {
+        text-align: center; /* Quantity */
+      }
+      .items td:nth-child(3) {
+        text-align: right; /* Price */
+      }
+      .items .total-row {
+        font-weight: bold;
+        border-top: 2px solid #333;
+      }
+      .footer {
+        text-align: center;
+        border-top: 1px dashed #ccc;
+        padding-top: 10px;
+        margin-top: 15px;
+        font-size: 12px;
+        color: #777;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ticket-container">
+      <div class="header">
+        <h1>SomosBaristas</h1>
+        <p>Ticket de Pedido</p>
+        <p>martes, 13 de enero de 2026, 8:29</p>
+      </div>
+
+      <div class="order-details">
+        <p><strong>Pedido ID:</strong> 7</p>
+        <p><strong>Total:</strong> $47000.00</p>
+      </div>
+
+      <div class="customer-details">
+        <h3>Datos del Cliente</h3>
+        <p><strong>Nombre:</strong> N/A</p>
+        <p><strong>Email:</strong> rabanal@gmail.com</p>
+        <p><strong>Teléfono:</strong> 1155707816</p>
+        <p><strong>Dirección:</strong> lope 12</p>
+      </div>
+
+      <div class="items">
+        <h3>Productos</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cant.</th>
+              <th>Precio</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr>
+                <td>undefined</td>
+                <td>2</td>
+                <td>$23500.00</td>
+            </tr>
+        
+          </tbody>
+        </table>
+      </div>
+
+      <div class="footer">
+        <p>¡Gracias por tu compra!</p>
+      </div>
+    </div>
+  </body>
+</html>

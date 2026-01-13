@@ -17,9 +17,12 @@ const CheckoutPage = () => {
   // Nuevos estados para manejar el flujo de pago
   const [isLoading, setIsLoading] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const [whatsappUrl, setWhatsappUrl] = useState(null); // Guardamos el link aquí
 
   // Cálculos del total (reutilizamos la lógica)
-  const shippingCost = 3900;
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const shippingCost = totalItems >= 2 ? 0 : 2000;
+
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -59,7 +62,9 @@ const CheckoutPage = () => {
     };
 
     // 3. Enviar el pedido al backend
-    fetch("/api/orders", {
+    // Usamos una variable de entorno para la URL de la API, o fallback a relativa para desarrollo local con proxy
+    const apiUrl = import.meta.env.VITE_API_URL || "/api";
+    fetch(`${apiUrl}/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -76,15 +81,12 @@ const CheckoutPage = () => {
       .then((data) => {
         console.log("Pedido recibido por el backend:", data);
 
-        // 4. Redirección a WhatsApp
+        // 4. En lugar de redirigir, guardamos la URL y mostramos éxito
         if (data.whatsappUrl) {
-          clearCart(); // Limpiamos el carrito antes de irnos
-          window.location.href = data.whatsappUrl; // Redirigimos a WhatsApp
-        } else {
-          // Fallback: Si no hay link, mostramos la pantalla de gracias local
-          setOrderPlaced(true);
-          clearCart();
+          setWhatsappUrl(data.whatsappUrl);
         }
+        setOrderPlaced(true);
+        clearCart(); // Limpiamos el carrito porque el pedido ya está en la BD
       })
       .catch((error) => {
         console.error("Error al enviar el pedido:", error);
@@ -175,40 +177,78 @@ const CheckoutPage = () => {
             <div className={styles.confirmationSection}>
               <h2 className={styles.summaryTitle}>¡Gracias por tu pedido!</h2>
               <p>Tu pedido ha sido registrado con éxito.</p>
-              <p>
-                Para completar la compra, por favor transfiere el monto total de{" "}
-                <strong>
-                  {new Intl.NumberFormat("es-AR", {
-                    style: "currency",
-                    currency: "ARS",
-                    minimumFractionDigits: 0,
-                  }).format(total)}
-                </strong>{" "}
-                a la siguiente cuenta:
-              </p>
-              <div className={styles.paymentDetails}>
-                <p>
-                  <strong>CBU:</strong> 0000003100055555555555
-                </p>
-                <p>
-                  <strong>Alias:</strong> somos.baristas.ok
-                </p>
-                <p>
-                  <strong>Titular:</strong> Somos Baristas S.A.
-                </p>
-              </div>
-              <p>
-                Una vez que realices el pago, envíanos el comprobante a nuestro
-                correo electrónico{" "}
-                <a href="mailto:pagos@somosbaristas.com">
-                  pagos@somosbaristas.com
-                </a>{" "}
-                junto con tu nombre completo.
-              </p>
-              <p>
-                Recibirás una confirmación por correo electrónico una vez que
-                verifiquemos el pago.
-              </p>
+
+              {/* Si tenemos link de WhatsApp, mostramos el botón prioritario */}
+              {whatsappUrl ? (
+                <div style={{ margin: "30px 0", textAlign: "center" }}>
+                  <p style={{ marginBottom: "15px" }}>
+                    Para finalizar, envía el detalle de tu pedido por WhatsApp:
+                  </p>
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.paymentButton}
+                    style={{
+                      textDecoration: "none",
+                      display: "inline-flex",
+                      width: "auto",
+                      padding: "15px 30px",
+                    }}
+                  >
+                    Finalizar en WhatsApp
+                  </a>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#666",
+                      marginTop: "10px",
+                    }}
+                  >
+                    Se abrirá en una nueva pestaña. Si usas PC, podrás elegir
+                    WhatsApp Web.
+                  </p>
+                </div>
+              ) : (
+                // Si NO hay WhatsApp configurado, mostramos los datos bancarios (Fallback)
+                <>
+                  <p>
+                    Para completar la compra, por favor transfiere el monto
+                    total de{" "}
+                    <strong>
+                      {new Intl.NumberFormat("es-AR", {
+                        style: "currency",
+                        currency: "ARS",
+                        minimumFractionDigits: 0,
+                      }).format(total)}
+                    </strong>{" "}
+                    a la siguiente cuenta:
+                  </p>
+                  <div className={styles.paymentDetails}>
+                    <p>
+                      <strong>CBU:</strong> 0000003100055555555555
+                    </p>
+                    <p>
+                      <strong>Alias:</strong> somos.baristas.ok
+                    </p>
+                    <p>
+                      <strong>Titular:</strong> Somos Baristas S.A.
+                    </p>
+                  </div>
+                  <p>
+                    Una vez que realices el pago, envíanos el comprobante a
+                    nuestro correo electrónico{" "}
+                    <a href="mailto:pagos@somosbaristas.com">
+                      pagos@somosbaristas.com
+                    </a>{" "}
+                    junto con tu nombre completo.
+                  </p>
+                  <p>
+                    Recibirás una confirmación por correo electrónico una vez
+                    que verifiquemos el pago.
+                  </p>
+                </>
+              )}
             </div>
           ) : (
             <>
@@ -227,11 +267,13 @@ const CheckoutPage = () => {
               <div className={styles.summaryRow}>
                 <span>Envío:</span>
                 <span>
-                  {new Intl.NumberFormat("es-AR", {
-                    style: "currency",
-                    currency: "ARS",
-                    minimumFractionDigits: 0,
-                  }).format(shippingCost)}
+                  {shippingCost === 0
+                    ? "Gratis"
+                    : new Intl.NumberFormat("es-AR", {
+                        style: "currency",
+                        currency: "ARS",
+                        minimumFractionDigits: 0,
+                      }).format(shippingCost)}
                 </span>
               </div>
               <div className={`${styles.summaryRow} ${styles.summaryTotal}`}>
