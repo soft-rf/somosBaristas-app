@@ -52,6 +52,7 @@
   font-weight: 700; /* Hace que 'envíos gratis' sea más audaz */
   text-transform: uppercase;
   margin-left: 5px;
+  font-size: 14px;
 }
 
 .infoIcon {
